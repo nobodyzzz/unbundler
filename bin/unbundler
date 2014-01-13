@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'unbundler'
+bin = "#{File.dirname(__FILE__)}/unbundle #{ARGV.join(" ")}"
+exec bin
