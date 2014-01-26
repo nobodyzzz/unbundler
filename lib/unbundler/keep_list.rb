@@ -13,7 +13,7 @@ module Unbundler
 
     def include?(gem)
       return false unless @keep_list.keys.include?(gem.name)
-      return false unless @keep_list[gem.name].match?('unbundler', gem.version)
+      return false unless @keep_list[gem.name].match?('unbundler', gem.version || ">= 0")
       true
     end
   end
