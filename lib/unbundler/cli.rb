@@ -81,7 +81,7 @@ private
     end
 
     def uninstall_gem(gem)
-      `gem -x uninstall #{gem}`
+      `gem uninstall -x #{gem}`
     end
   end
 end
