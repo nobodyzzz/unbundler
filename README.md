@@ -1,6 +1,6 @@
 # Unbundler
 
-TODO: Write a gem description
+Remove gems installed by bundler
 
 ## Installation
 
@@ -18,7 +18,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`unbundle` - uninstall all gems installed by current bundle except gems in global keep list
+`unbundle --keep gem1` - uninstall all gems except gem1 and gems in global keep list
+`unbundle show` or `unbundle list` - show list of gems to be unbundled
+`unbundle edit_keep_list` - open global keep list in default editor
 
 ## Contributing
 
