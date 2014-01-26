@@ -17,6 +17,25 @@ module Unbundler
       self.send(opts[:action])
     end
 
+    def parse_args
+      opts = { :action => :unbundle }
+      case ARGV.first
+      when "show", "list"
+        opts[:action] = :show
+      when "edit_keep_list"
+        opts[:action] = :edit_keep_list
+      end
+      opts.merge( Trollop::options do
+                    version "unbundler v#{Unbundler::VERSION}"
+                    opt :keep, "List of gems to keep", :type => :strings
+                    opt :plain, "Plain output for unbundle list"
+                    opt :interactive, "Interactive unbundle(ask about each gem)"
+                    opt :quiet, "Produce no output"
+                  end)
+    end
+
+private
+
     def unbundle
       @gems.each do |gem|
         uninstall_gem(gem) unless keep(gem)
@@ -62,25 +81,7 @@ module Unbundler
     end
 
     def uninstall_gem(gem)
-      puts "+ gem -x uninstall #{gem}"
+      `gem -x uninstall #{gem}`
     end
-
-    def parse_args
-      opts = { :action => :unbundle }
-      case ARGV.first
-      when "show", "list"
-        opts[:action] = :show
-      when "edit_keep_list"
-        opts[:action] = :edit_keep_list
-      end
-      opts.merge( Trollop::options do
-                    version "unbundler v#{Unbundler::VERSION}"
-                    opt :keep, "List of gems to keep", :type => :strings
-                    opt :plain, "Plain output for unbundle list"
-                    opt :interactive, "Interactive unbundle(ask about each gem)"
-                    opt :quiet, "Produce no output"
-                  end)
-    end
-
   end
 end

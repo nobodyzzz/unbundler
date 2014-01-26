@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.version       = Unbundler::VERSION
   spec.authors       = ["Stas Turlo"]
   spec.email         = ["stanislav.turlo@rightscale.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Remove gems installed by bundler}
+  spec.summary       = %q{Remove gems installed by bundler}
   spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.license       = "WTFPL"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec", ">= 2.0.0"
 
   spec.add_dependency "bundler"
   spec.add_dependency "trollop"

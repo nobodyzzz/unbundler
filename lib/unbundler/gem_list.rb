@@ -1,4 +1,5 @@
 require 'unbundler/keep_list'
+require 'bundler'
 
 module Unbundler
   class GemList
@@ -6,6 +7,14 @@ module Unbundler
       @keep_list = KeepList.new(keep_list || [])
       @global_keep_list = KeepList.new(global_keep_list)
     end
+
+    def each
+      gems_to_unbundle.each do |gem|
+        yield gem.name
+      end
+    end
+
+    private
 
     def unbundler_runtime_dependencies
       Gem::Dependency.new("unbundler").to_spec.runtime_dependencies
@@ -35,11 +44,6 @@ module Unbundler
       @bundled_gems ||= Bundler.load.specs
     end
 
-    def each
-      gems_to_unbundle.each do |gem|
-        yield gem.name
-      end
-    end
 
     def gems_to_unbundle
       @gems_to_unbundle ||= bundled_gems.reject { |gem| in_keep_list?(gem) }
